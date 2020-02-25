@@ -3,14 +3,16 @@ using CSharpEntityFrameworkPRSLibrary;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CSharpEntityFrameworkPRSLibrary.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200224204534_added product class")]
+    partial class addedproductclass
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,31 +68,6 @@ namespace CSharpEntityFrameworkPRSLibrary.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("CSharpEntityFrameworkPRSLibrary.Models.Orderline", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("Orderlines");
-                });
-
             modelBuilder.Entity("CSharpEntityFrameworkPRSLibrary.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -113,9 +90,6 @@ namespace CSharpEntityFrameworkPRSLibrary.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Code")
-                        .IsUnique();
-
                     b.ToTable("Products");
                 });
 
@@ -125,21 +99,6 @@ namespace CSharpEntityFrameworkPRSLibrary.Migrations
                         .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("CSharpEntityFrameworkPRSLibrary.Models.Orderline", b =>
-                {
-                    b.HasOne("CSharpEntityFrameworkPRSLibrary.Models.Order", "Order")
-                        .WithMany("Orderlines")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CSharpEntityFrameworkPRSLibrary.Models.Product", "Product")
-                        .WithMany("Orderlines")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

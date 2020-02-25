@@ -14,7 +14,10 @@ namespace CSharpEntityFrameworkPRSLibrary.Models {
         public double Sales { get; set; }
         public bool Active { get; set; }
 
-        public Customer() { }//default constructor
+      
+       public override string ToString() => $"{Id}/ {Name}/{Sales}/{Active}";
+       
+       public Customer() { }//default constructor
 
     }
 }

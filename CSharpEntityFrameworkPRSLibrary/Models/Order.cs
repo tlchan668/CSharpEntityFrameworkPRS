@@ -13,8 +13,12 @@ namespace CSharpEntityFrameworkPRSLibrary.Models {
         public double Amount { get; set; }
         public int CustomerId { get; set; }
         //want customer info received with order but don't create a column
-        public virtual Customer Customer { get; set; }
+        public virtual Customer Customer { get; set; }//get customer
+        
 
+        public override string ToString() => $"{Id}/ {Description}/{Amount}/{CustomerId}";
+
+        public virtual List<Orderline> Orderlines { get; set; } //tells ef not to create a column in table but return info of orderlines
         public Order() { }
 
     }
